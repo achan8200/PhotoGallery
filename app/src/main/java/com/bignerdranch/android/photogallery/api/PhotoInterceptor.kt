@@ -10,6 +10,7 @@ private const val API_KEY = "238a31053f2c51b4348f5138b3962377"
 class PhotoInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest: Request = chain.request()
+
         val newUrl: HttpUrl = originalRequest.url().newBuilder()
             .addQueryParameter("api_key", API_KEY)
             .addQueryParameter("format", "json")
@@ -17,9 +18,11 @@ class PhotoInterceptor : Interceptor {
             .addQueryParameter("extras", "url_s")
             .addQueryParameter("safesearch", "1")
             .build()
+
         val newRequest: Request = originalRequest.newBuilder()
             .url(newUrl)
             .build()
+
         return chain.proceed(newRequest)
     }
 }
