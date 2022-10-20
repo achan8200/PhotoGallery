@@ -80,6 +80,8 @@ class PollWorker(val context: Context, workerParams: WorkerParameters)
             putExtra(REQUEST_CODE, requestCode)
             putExtra(NOTIFICATION, notification)
         }
+
+        context.sendOrderedBroadcast(intent, PERM_PRIVATE)
     }
 
     companion object {
